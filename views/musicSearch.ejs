@@ -1,0 +1,37 @@
+<!DOCTYPE hmtl>
+<html>
+  <head>
+    <title>musicSearch</title>
+    <link href="/assets/styles.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- navigation -->
+    <% include partials/nav.ejs %>
+    <!-- navigation -->
+    <br><br><br>
+    <div>
+      <h3>musicSearch</h3>
+      <form method="post" action="/musicSearch" align="center">
+        <select id="genre" name="genre" onchange="if (this.value) window.location.href=this.value">
+          <option id="indie" name="indie" value="/musicSearch/?genre=indie">Indie</option>
+          <option id="metal" name="metal" value="/musicSearch/?genre=metal">Metal</option>
+          <option id="rock" name="rock" value="/musicSearch/?genre=rock">Rock</option>
+          <option id="trance" name="trance" value="/musicSearch/?genre=trance">Trance</option>
+        </select>
+        <select id="artist" name="artist">
+          <% for (let i=0; i < list.length; i++) { %>
+            <option id="<%= list[i].artist %>" value="<%= list[i].artist %>"><%= list[i].artist %></option>
+          <% } %>
+        </select>
+        <button type="submit" value="Create Query">Create Query</button>
+      </form>
+      <script>document.getElementById("<%-list[0].genre %>").selected = true;</script>
+      <script>document.getElementById("<%-create.artist %>").selected = true;</script>
+    </div>
+    <div class="shell-wrap">
+      <ul class="shell-body">
+        <li><%=create.str %> <a target="_blank" href="<%=create.link %>"><%=create.artist %></a></li>
+      </ul>
+    </div>
+  </body>
+</html>
